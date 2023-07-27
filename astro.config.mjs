@@ -8,10 +8,20 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx({
-    syntaxHighlight: "shiki",
-    shikiConfig: {
-      theme: "dracula"
-    }
-  }), svelte(), tailwind(), image(), react()]
+  markdown: {
+    drafts: true,
+  },
+  integrations: [
+    mdx({
+      drafts: true,
+      syntaxHighlight: "shiki",
+      shikiConfig: {
+        theme: "dracula",
+      },
+    }),
+    svelte(),
+    tailwind(),
+    image(),
+    react(),
+  ],
 });

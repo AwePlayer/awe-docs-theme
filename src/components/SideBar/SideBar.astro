@@ -5,27 +5,37 @@ import NavMenu from "./NavMenu.astro";
 const navItems = [
   {
     label: "Quick Start",
-    href: "",
+    href: "/quickstart",
   },
   {
     label: "Installation",
-    href: "",
+    href: "/installation",
   },
   {
     label: "Examples",
-    href: "",
+    href: "/examples",
   },
   {
     label: "Frameworks",
-    href: "",
+    href: "/frameworks",
     childrens: [
       {
         label: "Svelte",
-        href: "",
+        href: "/svelte",
       },
       {
         label: "React",
-        href: "",
+        href: "/react",
+        childrens: [
+          {
+            label: "Create React App",
+            href: "/create-react-app",
+          },
+          {
+            label: "Vite",
+            href: "/vite",
+          },
+        ],
       },
     ],
   },
@@ -38,7 +48,7 @@ const navItems = [
   <nav class="w-full h-full p-4 space-y-4 flex flex-col justify-between">
     <div class="space-y-4">
       <Search client:load />
-      <NavMenu items={navItems} />
+      <NavMenu baseUrl="/docs" items={navItems} />
     </div>
     <div>
       <ul>
