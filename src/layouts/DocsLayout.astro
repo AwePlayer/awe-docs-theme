@@ -1,0 +1,36 @@
+---
+import NavBar from "../components/NavBar.astro";
+import SideBar from "../components/SideBar/SideBar.astro";
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <NavBar />
+    <div class="flex w-full">
+      <SideBar />
+      <div class="p-8">
+        <slot />
+      </div>
+    </div>
+  </body>
+</html>
+
+<style is:global lang="postcss">
+  @layer {
+    html,
+    body {
+      @apply bg-zinc-950 text-white;
+    }
+  }
+</style>

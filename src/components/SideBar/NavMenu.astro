@@ -1,0 +1,64 @@
+---
+const { items } = Astro.props;
+---
+
+<ul>
+  {
+    items.map((item: any) => (
+      <li class="group cursor-pointer">
+        {Array.isArray(item.childrens) ? (
+          <div class="flex items-center space-x-2">
+            <svg
+              class="group-hover:rotate-90 transition-transform ease-in-out"
+              width="20"
+              height="20"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 6L15 12L9 18"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <div>{item.label}</div>
+          </div>
+        ) : (
+          <a class="w-full h-full flex items-center" href="">
+            <div class="flex items-center space-x-2">
+              <svg
+                width="20"
+                height="20"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 12H18"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <div>{item.label}</div>
+            </div>
+          </a>
+        )}
+      </li>
+    ))
+  }
+</ul>
+
+<style lang="postcss">
+  li {
+    @apply p-2 text-sm font-extralight text-zinc-500 hover:text-white;
+  }
+</style>
+
+<!-- <div class="pl-2">
+  <Astro.self items={item.childrens} />
+</div> -->

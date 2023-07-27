@@ -1,0 +1,55 @@
+---
+import Search from "../SearchDialog";
+import NavMenu from "./NavMenu.astro";
+
+const navItems = [
+  {
+    label: "Quick Start",
+    href: "",
+  },
+  {
+    label: "Installation",
+    href: "",
+  },
+  {
+    label: "Examples",
+    href: "",
+  },
+  {
+    label: "Frameworks",
+    href: "",
+    childrens: [
+      {
+        label: "Svelte",
+        href: "",
+      },
+      {
+        label: "React",
+        href: "",
+      },
+    ],
+  },
+];
+---
+
+<div
+  class="w-80 flex flex-col items-center h-[calc(100vh-56px)] border-r border-zinc-900"
+>
+  <nav class="w-full h-full p-4 space-y-4 flex flex-col justify-between">
+    <div class="space-y-4">
+      <Search client:load />
+      <NavMenu items={navItems} />
+    </div>
+    <div>
+      <ul>
+        <li><a href="">Sidebar</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<style lang="postcss">
+  li {
+    @apply p-2 text-zinc-400 hover:text-white font-extralight cursor-pointer text-sm flex space-x-2 items-center transition-all ease-in-out;
+  }
+</style>
