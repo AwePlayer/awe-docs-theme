@@ -1,45 +1,59 @@
 ---
 import Search from "../SearchDialog";
 import NavMenu from "./NavMenu.astro";
+import { getCollection } from "astro:content";
+const collection = await getCollection("docs");
 
-const navItems = [
-  {
-    label: "Quick Start",
-    href: "/quickstart",
-  },
-  {
-    label: "Installation",
-    href: "/installation",
-  },
-  {
-    label: "Examples",
-    href: "/examples",
-  },
-  {
-    label: "Frameworks",
-    href: "/frameworks",
-    childrens: [
-      {
-        label: "Svelte",
-        href: "/svelte",
-      },
-      {
-        label: "React",
-        href: "/react",
-        childrens: [
-          {
-            label: "Create React App",
-            href: "/create-react-app",
-          },
-          {
-            label: "Vite",
-            href: "/vite",
-          },
-        ],
-      },
-    ],
-  },
-];
+interface SidebarItem {
+  title: string;
+  slug: string;
+  children: SidebarItem[];
+}
+
+function getSlugSegments(slug: string): string[] {
+  return slug.split("/").filter(Boolean);
+}
+
+function buildSidebar(data: { slug: string }[]): SidebarItem {
+  const sidebar: SidebarItem = { title: "", slug: "", children: [] };
+
+  data.forEach((item) => {
+    const segments = getSlugSegments(item.slug);
+    let currentLevel = sidebar;
+
+    segments.forEach((segment) => {
+      let foundChild = currentLevel.children.find(
+        (child) => child.title === segment
+      );
+      if (!foundChild) {
+        foundChild = { title: segment, slug: "", children: [] };
+        currentLevel.children.push(foundChild);
+      }
+      currentLevel = foundChild;
+    });
+
+    currentLevel.slug = item.slug;
+  });
+
+  return sidebar;
+}
+
+function convertSidebarToArray(
+  sidebar: SidebarItem[],
+  parentKey = ""
+): SidebarItem[] {
+  return sidebar.map((item) => {
+    const fullPath = parentKey ? `${parentKey}/${item.title}` : item.title;
+    return {
+      ...item,
+      slug: fullPath,
+      children: convertSidebarToArray(item.children, fullPath),
+    };
+  });
+}
+
+const nestedSidebar = buildSidebar(collection);
+const sidebarArray = convertSidebarToArray(nestedSidebar.children);
 ---
 
 <div
@@ -48,7 +62,7 @@ const navItems = [
   <nav class="w-full h-full p-4 space-y-4 flex flex-col justify-between">
     <div class="space-y-4">
       <Search client:load />
-      <NavMenu baseUrl="/docs" items={navItems} />
+      <NavMenu baseUrl="/docs" sidebarArray={sidebarArray} />
     </div>
     <div>
       <ul>
