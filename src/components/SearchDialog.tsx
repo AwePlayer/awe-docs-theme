@@ -72,8 +72,8 @@ const Search: React.FC = () => {
         </div>
       </SearchDialog.Trigger>
       <SearchDialog.Portal>
-        <SearchDialog.Overlay className="bg-black/40 absolute top-0 left-0 right-0 bottom-0 backdrop-blur-lg" />
-        <SearchDialog.Content className="absolute top-0 left-0 right-0 bottom-0 max-w-4xl h-fit p-4 mx-auto xl:mt-10">
+        <SearchDialog.Overlay className="bg-black/40 absolute top-0 left-0 right-0 bottom-0 backdrop-blur-lg z-10" />
+        <SearchDialog.Content className="absolute top-0 left-0 right-0 bottom-0 max-w-4xl h-fit p-4 mx-auto xl:mt-10 z-10">
           <SearchDialog.Title className="text-lg font-medium text-zinc-200">
             Search...
           </SearchDialog.Title>

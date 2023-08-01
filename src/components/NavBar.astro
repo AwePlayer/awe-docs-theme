@@ -3,7 +3,9 @@ import { Image } from "@astrojs/image/components";
 import themeConfig from "../../theme.config";
 ---
 
-<div class="w-full h-14 my-auto sticky top-0 border-b border-zinc-900">
+<div
+  class="w-full h-14 my-auto sticky top-0 border-b border-zinc-900 backdrop-blur-lg"
+>
   <nav
     class="w-full max-w-4xl mx-auto h-full flex justify-between items-center px-4"
   >
@@ -41,7 +43,7 @@ import themeConfig from "../../theme.config";
 
 <style lang="postcss" is:global>
   .nav-link {
-    @apply opacity-75 hover:opacity-100 transition-opacity ease-out;
+    @apply opacity-50 hover:opacity-100 transition-opacity ease-out;
   }
   .nav-icon {
     @apply fill-white w-full h-full;
