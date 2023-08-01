@@ -4,7 +4,7 @@ import themeConfig from "../../theme.config";
 ---
 
 <div
-  class="w-full h-14 my-auto sticky top-0 border-b border-zinc-900 backdrop-blur-lg"
+  class="w-full bg-zinc-950/80 h-14 my-auto sticky top-0 border-b border-zinc-900 backdrop-blur-lg z-20"
 >
   <nav
     class="w-full max-w-4xl mx-auto h-full flex justify-between items-center px-4"
@@ -14,7 +14,7 @@ import themeConfig from "../../theme.config";
         <div class="w-8 h-8">
           <Image
             class="w-full h-full"
-            src={import("../assets/logo.svg")}
+            src={import("../assets/logo.svg") as any}
             alt="logo"
           />
         </div>

@@ -4,7 +4,7 @@ import themeConfig from "../../../theme.config";
 ---
 
 <div
-  class="w-80 flex flex-col items-center h-[calc(100vh-56px)] border-r border-zinc-900"
+  class="w-80 sticky top-14 flex flex-col items-center h-[calc(100vh-56px)] border-r border-zinc-900"
 >
   <nav class="w-full h-full flex flex-col justify-between relative">
     <div class="w-full h-full overflow-hidden">
@@ -14,7 +14,7 @@ import themeConfig from "../../../theme.config";
         <Search client:load />
       </div>
       <ul
-        class="nav-groups p-1 w-full h-full overflow-y-scroll pt-20 pb-10 no-scrollbar"
+        class="nav-groups p-4 w-full h-full overflow-y-scroll pt-20 pb-10 no-scrollbar"
       >
         {
           themeConfig.sidebar?.map((item) => (
