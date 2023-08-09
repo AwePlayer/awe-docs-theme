@@ -1,7 +1,11 @@
 ---
 import { getCollection } from "astro:content";
-import DocsLayout from "../../layouts/DocsLayout.astro";
 import stringCorrector from "../../utils/stringCorrector";
+import MainLayout from "../../layouts/MainLayout.astro";
+import NavBar from "../../components/NavBar.astro";
+import LeftSideBar from "../../components/SideBar/LeftSideBar.astro";
+import RightSideBar from "../../components/SideBar/RightSideBar.astro";
+import Footer from "../../components/Footer.astro";
 
 export async function getStaticPaths() {
   const docsContent = await getCollection("docs");
@@ -16,6 +20,20 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<DocsLayout title={entry.data.title} date={entry.data.date}>
-  <Content />
-</DocsLayout>
+<MainLayout title={entry.data.title}>
+  <NavBar />
+  <div class="flex w-full">
+    <LeftSideBar />
+    <div class="px-8 py-6 flex-1">
+      <div class="text-sm text-zinc-600 pb-2 flex items-center justify-between">
+        <span>{entry.data.date}</span>
+        <span>2 min read</span>
+      </div>
+      <article class="prose dark:prose-invert">
+        <Content />
+      </article>
+    </div>
+    <RightSideBar />
+  </div>
+  <Footer />
+</MainLayout>

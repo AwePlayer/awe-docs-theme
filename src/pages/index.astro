@@ -1,9 +1,13 @@
 ---
-import { Image } from "@astrojs/image/components";
-import HomeLayout from "../layouts/HomeLayout.astro";
+import { Image } from "astro:assets";
+import planetImage from "../assets/images/planet.png";
+import NavBar from "../components/NavBar.astro";
+import Footer from "../components/Footer.astro";
+import MainLayout from "../layouts/MainLayout.astro";
 ---
 
-<HomeLayout title="Home Page">
+<MainLayout title="Home Page">
+  <NavBar />
   <main class="space-y-4 xl:space-y-10 z-40 bg-no-repeat bg-cover">
     <div
       class="px-4 py-10 xl:p-32 space-y-10 flex flex-col justify-center items-center"
@@ -11,8 +15,9 @@ import HomeLayout from "../layouts/HomeLayout.astro";
       <div class="w-40">
         <Image
           class="w-full h-full"
-          src={import("../assets/images/planet.png")}
+          src={planetImage}
           alt="planet-illustration"
+          format="avif"
         />
       </div>
       <h1
@@ -24,8 +29,8 @@ import HomeLayout from "../layouts/HomeLayout.astro";
         class="w-fit h-fit bg-gradient-to-tr from-blue-300 via-indigo-400 to-purple-300 group transition-all ease-in-out rounded-xl p-[1px]"
       >
         <a
-          href="/docs"
-          class="px-4 py-2 bg-zinc-950 hover:bg-zinc-900 flex justify-center items-center space-x-2 rounded-[11px]"
+          href="/docs/getting-started"
+          class="px-4 py-2 dark:bg-zinc-950 dark:hover:bg-zinc-900 flex justify-center items-center space-x-2 rounded-[11px]"
         >
           <span class="text-lg font-semibold text-zinc-200 text-center">
             Checkout the Theme
@@ -48,4 +53,5 @@ import HomeLayout from "../layouts/HomeLayout.astro";
       </div>
     </div>
   </main>
-</HomeLayout>
+  <Footer />
+</MainLayout>

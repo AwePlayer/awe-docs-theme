@@ -46,14 +46,13 @@ const Search: React.FC = () => {
 
     const searchResults = index.search(value);
     setResults(searchResults);
-    console.log(searchResults);
   };
 
   return (
     <SearchDialog.Root>
       <SearchDialog.Trigger asChild>
         <div className="w-full p-[1px] h-10 transition-all ease-in-out hover:bg-gradient-to-tr from-blue-300 via-indigo-400 to-purple-300 rounded-xl">
-          <button className="w-full h-full p-2 rounded-[11px] bg-zinc-900 outline-none text-left px-4 flex justify-start items-center space-x-2">
+          <button className="w-full h-full p-2 rounded-[11px] bg-white dark:bg-zinc-900 outline-none text-left px-4 flex justify-start items-center space-x-2">
             <svg
               className="w-4 h-4 stroke-zinc-400"
               fill="none"
@@ -72,8 +71,8 @@ const Search: React.FC = () => {
         </div>
       </SearchDialog.Trigger>
       <SearchDialog.Portal>
-        <SearchDialog.Overlay className="bg-black/40 absolute top-0 left-0 right-0 bottom-0 backdrop-blur-lg z-50" />
-        <SearchDialog.Content className="absolute top-0 left-0 right-0 bottom-0 max-w-4xl h-fit p-4 mx-auto xl:mt-10 z-50">
+        <SearchDialog.Overlay className="bg-black/40 fixed top-0 left-0 right-0 bottom-0 backdrop-blur-lg z-50" />
+        <SearchDialog.Content className="fixed top-0 left-0 right-0 bottom-0 max-w-4xl h-fit p-4 mx-auto xl:mt-10 z-50">
           <SearchDialog.Title className="text-lg font-medium text-zinc-200">
             Search...
           </SearchDialog.Title>
@@ -104,28 +103,33 @@ const Search: React.FC = () => {
               </div>
             </div>
           </fieldset>
-          <div className="w-full rounded-xl bg-zinc-900 p-1">
-            <ul className="divide-y divide-zinc-800">
-              {results.map((result) => (
-                <li
-                  key={result.ref}
-                  className="p-4 rounded-lg hover:bg-zinc-800"
-                >
-                  <div className="text-lg">
-                    {data.find((item) => item.id === Number(result.ref))?.title}
-                  </div>
-                  <div className="text-sm text-zinc-400">
-                    {
-                      data.find((item) => item.id === Number(result.ref))
-                        ?.content
-                    }
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {results.length !== 0 && (
+            <div className="w-full rounded-xl bg-zinc-900/80 border border-zinc-800 backdrop-blur-lg p-1">
+              <ul>
+                {results.map((result) => (
+                  <li
+                    key={result.ref}
+                    className="p-4 rounded-lg hover:bg-zinc-800/80"
+                  >
+                    <div className="text-lg">
+                      {
+                        data.find((item) => item.id === Number(result.ref))
+                          ?.title
+                      }
+                    </div>
+                    <div className="text-sm text-zinc-400">
+                      {
+                        data.find((item) => item.id === Number(result.ref))
+                          ?.content
+                      }
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           <SearchDialog.Close asChild>
-            <button className="absolute top-4 right-4" aria-label="Close">
+            <button className="fixed top-4 right-4" aria-label="Close">
               <svg
                 fill="none"
                 height="24"

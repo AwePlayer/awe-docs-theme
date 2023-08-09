@@ -1,10 +1,11 @@
 ---
-import { Image } from "@astrojs/image/components";
+import { Image } from "astro:assets";
+import logoImage from "../assets/logo.svg";
 import themeConfig from "../../theme.config";
 ---
 
 <div
-  class="w-full bg-zinc-950/80 h-14 my-auto sticky top-0 border-b border-zinc-900 backdrop-blur-lg z-20"
+  class="w-full bg-white/80 dark:bg-zinc-950/80 h-14 my-auto sticky top-0 border-b dark:border-zinc-900 backdrop-blur-lg z-20"
 >
   <nav
     class="w-full max-w-4xl mx-auto h-full flex justify-between items-center px-4"
@@ -12,11 +13,7 @@ import themeConfig from "../../theme.config";
     <a href="/">
       <div class="flex items-center space-x-2">
         <div class="w-8 h-8">
-          <Image
-            class="w-full h-full"
-            src={import("../assets/logo.svg") as any}
-            alt="logo"
-          />
+          <Image class="w-full h-full" src={logoImage} alt="logo" />
         </div>
         <span class="font-semibold">{themeConfig.title}</span>
       </div>
@@ -46,6 +43,6 @@ import themeConfig from "../../theme.config";
     @apply opacity-50 hover:opacity-100 transition-opacity ease-out;
   }
   .nav-icon {
-    @apply fill-white w-full h-full;
+    @apply fill-current w-full h-full;
   }
 </style>
