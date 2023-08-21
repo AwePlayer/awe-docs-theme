@@ -71,7 +71,7 @@ const Search: React.FC = () => {
         </div>
       </SearchDialog.Trigger>
       <SearchDialog.Portal>
-        <SearchDialog.Overlay className="bg-black/40 fixed top-0 left-0 right-0 bottom-0 backdrop-blur-lg z-50" />
+        <SearchDialog.Overlay className="bg-zinc-200/40 dark:bg-black/40 fixed top-0 left-0 right-0 bottom-0 backdrop-blur-lg z-50" />
         <SearchDialog.Content className="fixed top-0 left-0 right-0 bottom-0 max-w-4xl h-fit p-4 mx-auto xl:mt-10 z-50">
           <SearchDialog.Title className="text-lg font-medium text-zinc-200">
             Search...
@@ -79,7 +79,7 @@ const Search: React.FC = () => {
           <fieldset>
             <div className="w-full py-4">
               <div className="w-full p-[1px] h-14 transition-all ease-in-out focus-within:bg-gradient-to-tr from-blue-300 via-indigo-400 to-purple-300 rounded-xl">
-                <div className="px-4 py-2 w-full h-full rounded-[11px] bg-zinc-900 flex justify-start items-center space-x-4">
+                <div className="px-4 py-2 w-full h-full rounded-[11px] bg-white dark:bg-zinc-900 flex justify-start items-center space-x-4">
                   <svg
                     className="w-6 h-6 stroke-zinc-400"
                     fill="none"
