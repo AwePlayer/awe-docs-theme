@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import logoImage from "../assets/logo.svg";
+import logoLight from "../assets/logo-light.svg";
+import logoDark from "../assets/logo-dark.svg";
 import themeConfig from "../../theme.config";
 ---
 
@@ -9,7 +10,16 @@ import themeConfig from "../../theme.config";
     <section class="space-y-4">
       <div class="flex items-center justify-center space-x-2">
         <div class="w-8 h-8">
-          <Image class="w-full h-full" src={logoImage} alt="logo" />
+          <Image
+            class="w-full h-full block dark:hidden"
+            src={logoLight}
+            alt="logo"
+          />
+          <Image
+            class="w-full h-full hidden dark:block"
+            src={logoDark}
+            alt="logo"
+          />
         </div>
         <span class="font-semibold">{themeConfig.title}</span>
       </div>
@@ -38,7 +48,7 @@ import themeConfig from "../../theme.config";
       </ul>
     </section>
   </footer>
-  <div class="w-fit mx-auto lg:absolute lg:bottom-4 lg:left-4">
+  <div class="w-fit mx-auto lg:ml-0">
     <div
       class="p-1 flex items-center space-x-1 rounded-full border dark:border-zinc-700/40"
     >
@@ -90,7 +100,7 @@ import themeConfig from "../../theme.config";
           </path><path d="m0 0h32v32h-32z" fill="none"></path>
         </svg>
       </button>
-      <button class="p-2 dark:bg-white/10 rounded-full">
+      <button data-theme="system" class="p-2 bg-transparent rounded-full">
         <svg
           class="w-4 h-4 fill-black dark:fill-white"
           viewBox="0 0 32 32"
@@ -109,14 +119,29 @@ import themeConfig from "../../theme.config";
 <script>
   const buttons = document.querySelectorAll("#theme-btn");
 
+  function setActiveTheme(theme) {
+    buttons.forEach((btn) => {
+      btn.classList.remove("bg-zinc-200", "dark:bg-zinc-800");
+    });
+    localStorage.setItem("theme", theme);
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }
+
+  function initializeTheme() {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme) {
+      setActiveTheme(storedTheme);
+    }
+  }
+
   buttons.forEach((button) => {
+    const theme = button.dataset.theme;
+
     button.addEventListener("click", function () {
-      localStorage.setItem("theme", this.dataset.theme);
-      if (this.dataset.theme === "light") {
-        document.documentElement.classList.remove("dark");
-      } else {
-        document.documentElement.classList.add("dark");
-      }
+      setActiveTheme(theme);
+      button.classList.add("bg-zinc-200", "dark:bg-zinc-800");
     });
   });
+
+  initializeTheme();
 </script>

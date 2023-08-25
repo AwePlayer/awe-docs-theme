@@ -1,4 +1,4 @@
-type ModeType = "light" | "dark" | "system";
+export type ThemeModeType = "light" | "dark" | "system";
 
 interface NavItemType {
   title: string;
@@ -10,14 +10,20 @@ interface NavItemType {
 interface FooterType {
   copyright?: string;
   socials?: NavItemType[];
+  categories?: any;
+}
+
+interface NavBarType {
+  left?: NavItemType[];
+  right?: NavItemType[];
 }
 
 interface ThemeConfig {
   logo?: string | undefined;
   title: string;
-  mode: ModeType;
+  mode: ThemeModeType;
   baseUrl: string;
-  navbar?: NavItemType[];
+  navbar?: NavBarType;
   sidebar?: NavItemType[];
   footer?: FooterType;
 }

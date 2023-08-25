@@ -1,39 +1,89 @@
 ---
 import { Image } from "astro:assets";
-import logoImage from "../assets/logo.svg";
 import themeConfig from "../../theme.config";
+import logoLight from "../assets/logo-light.svg";
+import logoDark from "../assets/logo-dark.svg";
 ---
 
 <div
-  class="w-full bg-white/80 dark:bg-zinc-950/80 h-14 my-auto sticky top-0 border-b dark:border-zinc-900 backdrop-blur-lg z-20"
+  class="w-full bg-white/80 dark:bg-zinc-950/80 h-14 my-auto sticky top-0 border-b dark:border-zinc-900 backdrop-blur-xl z-20"
 >
-  <nav
-    class="w-full max-w-4xl mx-auto h-full flex justify-between items-center px-4"
-  >
-    <a href="/">
-      <div class="flex items-center space-x-2">
-        <div class="w-8 h-8">
-          <Image class="w-full h-full" src={logoImage} alt="logo" />
+  <nav class="w-full h-full px-4 flex justify-between items-center">
+    <div class="flex space-x-4 items-center">
+      <a href="/">
+        <div class="flex items-center space-x-2">
+          <div class="w-8 h-8">
+            <Image
+              id="logo"
+              class="w-full h-full block dark:hidden"
+              src={logoLight}
+              alt="logo"
+            />
+            <Image
+              id="logo"
+              class="w-full h-full hidden dark:block"
+              src={logoDark}
+              alt="logo"
+            />
+          </div>
+          <span class="font-semibold">{themeConfig.title}</span>
         </div>
-        <span class="font-semibold">{themeConfig.title}</span>
+      </a>
+      <div>
+        <ul class="flex items-center space-x-6 text-sm font-semibold">
+          {
+            themeConfig.navbar?.left?.map((item) => (
+              <li class="nav-link">
+                {item.icon ? (
+                  <a href={item.href}>
+                    <div set:html={item.icon} class="w-4 h-4" />
+                  </a>
+                ) : (
+                  <a href={item.href}>{item.title}</a>
+                )}
+              </li>
+            ))
+          }
+        </ul>
       </div>
-    </a>
-    <div>
-      <ul class="flex items-center space-x-6">
-        {
-          themeConfig.navbar?.map((item) => (
-            <li class="nav-link">
-              {item.icon ? (
-                <a href={item.href}>
-                  <div set:html={item.icon} class="w-4 h-4" />
-                </a>
-              ) : (
-                <a href={item.href}>{item.title}</a>
-              )}
-            </li>
-          ))
-        }
-      </ul>
+    </div>
+    <div class="flex items-center space-x-6">
+      <button
+        class="hidden lg:flex w-80 items-center space-x-2 group transition-all ring-1 ring-black/20 dark:ring-white/20 hover:bg-zinc-400/20 dark:hover:bg-zinc-600/20 px-4 py-2 rounded-md"
+      >
+        <svg
+          class="w-4 h-4 stroke-zinc-400 transition-colors"
+          fill="none"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m17 17 5 5m-2.5-11.25c0 4.8325-3.9175 8.75-8.75 8.75-4.83249 0-8.75-3.9175-8.75-8.75 0-4.83249 3.91751-8.75 8.75-8.75 4.8325 0 8.75 3.91751 8.75 8.75z"
+            stroke-line-cap="round"
+            stroke-line-join="round"
+            stroke-width="2"
+          >
+          </path>
+        </svg>
+        <span class="text-zinc-400 text-sm transition-colors">Search...</span>
+      </button>
+      <div>
+        <ul class="flex items-center space-x-6 text-sm font-semibold">
+          {
+            themeConfig.navbar?.right?.map((item) => (
+              <li class="nav-link">
+                {item.icon ? (
+                  <a href={item.href}>
+                    <div set:html={item.icon} class="w-4 h-4" />
+                  </a>
+                ) : (
+                  <a href={item.href}>{item.title}</a>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </nav>
 </div>

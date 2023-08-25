@@ -1,57 +1,93 @@
 ---
-import { Image } from "astro:assets";
-import planetImage from "../assets/images/planet.png";
+import { getImage } from "astro:assets";
+import blurBg from "../assets/images/bg-blur.png";
 import NavBar from "../components/NavBar.astro";
 import Footer from "../components/Footer.astro";
 import MainLayout from "../layouts/MainLayout.astro";
+
+const optimizedBackground = await getImage({
+  src: blurBg,
+  format: "avif",
+});
 ---
 
 <MainLayout title="Home Page">
   <NavBar />
-  <main class="space-y-4 xl:space-y-10 z-40 bg-no-repeat bg-cover">
-    <div
-      class="px-4 py-10 xl:p-32 space-y-10 flex flex-col justify-center items-center"
+  <main
+    style={`background-image: url(${optimizedBackground.src});`}
+    class="bg-no-repeat bg-cover bg-top p-4"
+  >
+    <section
+      class="relative xl:p-32 px-4 py-10 space-y-10 flex flex-col justify-center items-center"
     >
-      <div class="w-40">
-        <Image
-          class="w-full h-full"
-          src={planetImage}
-          alt="planet-illustration"
-          format="avif"
-        />
-      </div>
-      <h1
-        class="text-4xl xl:text-8xl xl:py-2 font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-indigo-200 to-purple-400"
-      >
+      <h1 class="text-4xl xl:text-8xl xl:py-2 text-center font-bold text-white">
         AweDocs theme for Astro
       </h1>
-      <div
-        class="w-fit h-fit bg-gradient-to-tr from-blue-300 via-indigo-400 to-purple-300 group transition-all ease-in-out rounded-xl p-[1px]"
+      <a
+        href="/docs/getting-started"
+        class="flex border-b border-white/40 hover:border-transparent items-center space-x-2 group transition-all ring-1 ring-transparent hover:ring-white/40 px-4 py-2 hover:rounded-md"
       >
-        <a
-          href="/docs/getting-started"
-          class="px-4 py-2 dark:bg-zinc-950 dark:hover:bg-zinc-900 flex justify-center items-center space-x-2 rounded-[11px]"
+        <span class="text-lg font-semibold text-center text-white">
+          Checkout the Theme
+        </span>
+        <svg
+          class="group-hover:translate-x-1 transition-transform ease-in-out fill-white"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <span class="text-lg font-semibold text-zinc-200 text-center">
-            Checkout the Theme
-          </span>
-          <svg
-            class="group-hover:translate-x-1 transition-transform ease-in-out"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          <path
+            d="M12.293 5.293a1 1 0 0 1 1.414 0l6 6a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414L16.586 13H5a1 1 0 1 1 0-2h11.586l-4.293-4.293a1 1 0 0 1 0-1.414z"
           >
-            <path
-              d="M12.293 5.293a1 1 0 0 1 1.414 0l6 6a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414L16.586 13H5a1 1 0 1 1 0-2h11.586l-4.293-4.293a1 1 0 0 1 0-1.414z"
-              fill="#ffffff"
-            >
-            </path>
-          </svg>
-        </a>
-      </div>
-    </div>
+          </path>
+        </svg>
+      </a>
+    </section>
+    <div class="hidden lg:block h-[1px] w-full bg-white/20"></div>
+    <section class="p-4 lg:p-10 max-w-xl space-y-4">
+      <h2
+        class="text-2xl font-bold border-b border-black/20 dark:border-white/20 pb-1 w-fit"
+      >
+        Features
+      </h2>
+      <ul class="space-y-4 list-decimal">
+        <li>
+          <a class="space-y-2">
+            <div class="font-semibold text-lg">
+              Sleek and Sophisticated Design
+            </div>
+            <div class="dark:text-white/80">
+              Meticulously crafted with utmost attention to both form and
+              function, offering a contemporary and minimalist design.
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="space-y-2">
+            <div class="font-semibold text-lg">
+              Versatile Reusable Components
+            </div>
+            <div class="dark:text-white/80">
+              Includes beautifully designed and refined reusable components
+              right from the start.
+            </div>
+          </a>
+        </li>
+        <li>
+          <a class="space-y-2">
+            <div class="font-semibold text-lg">
+              Unlimited Customization Possibilities
+            </div>
+            <div class="dark:text-white/80">
+              This framework serves as a foundation built upon Astro.js. Feel
+              free to fork it and tailor it to your exact specifications.
+            </div>
+          </a>
+        </li>
+      </ul>
+    </section>
   </main>
   <Footer />
 </MainLayout>

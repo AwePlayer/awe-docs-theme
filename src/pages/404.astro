@@ -1,0 +1,21 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import NavBar from "../components/NavBar.astro";
+---
+
+<MainLayout title="404">
+  <div>
+    <NavBar />
+    <div class="text-center pt-10 p-4 lg:p-10 space-y-4">
+      <h1 class="text-4xl lg:text-8xl font-bold">404</h1>
+      <div>
+        <p class="lg:text-lg font-semibold">
+          Oops! The page you're looking for doesn't exist.
+        </p>
+      </div>
+      <div>
+        <a href="/" class="text-sm underline decoration-solid">Return Home</a>
+      </div>
+    </div>
+  </div>
+</MainLayout>

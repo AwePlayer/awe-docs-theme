@@ -1,5 +1,4 @@
 ---
-import Search from "../SearchDialog";
 import themeConfig from "../../../theme.config";
 ---
 
@@ -8,17 +7,12 @@ import themeConfig from "../../../theme.config";
 >
   <nav class="w-full h-full flex flex-col justify-between relative">
     <div class="w-full h-full overflow-hidden">
-      <div
-        class="p-4 absolute top-0 left-0 right-0 backdrop-blur-xl w-full z-[1]"
-      >
-        <Search client:load />
-      </div>
       <ul
-        class="nav-groups p-4 w-full h-full overflow-y-scroll pt-20 pb-10 no-scrollbar"
+        class="nav-groups p-4 w-full h-full overflow-y-scroll pb-10 no-scrollbar"
       >
         {
           themeConfig.sidebar?.map((item) => (
-            <div class="text-zinc-600 group z-0">
+            <div class="text-zinc-500 group z-0">
               <a
                 href={themeConfig.baseUrl + item.href}
                 class="py-1 flex items-center hover:text-indigo-500 dark:hover:text-indigo-200 space-x-2"
@@ -45,7 +39,7 @@ import themeConfig from "../../../theme.config";
                   class={
                     !item.children
                       ? "text-sm px-2"
-                      : "text-lg text-zinc-500 group-hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-200 dark:to-purple-200"
+                      : "text-lg font-semibold text-zinc-500 group-hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400"
                   }
                 >
                   {item.title}
@@ -54,7 +48,7 @@ import themeConfig from "../../../theme.config";
               <ul class="border-l ml-2 pl-5 dark:border-zinc-700 group-hover:border-indigo-500 dark:group-hover:border-indigo-200">
                 {item.children?.map((item) => (
                   <a
-                    class="hover:text-indigo-500 dark:hover:text-indigo-200"
+                    class="hover:text-indigo-500 dark:hover:text-indigo-400"
                     href={themeConfig.baseUrl + item.href}
                   >
                     <li class="py-1 text-sm">{item.title}</li>

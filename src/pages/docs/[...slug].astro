@@ -21,19 +21,25 @@ const { Content } = await entry.render();
 ---
 
 <MainLayout title={entry.data.title}>
-  <NavBar />
-  <div class="flex w-full">
-    <LeftSideBar />
-    <div class="px-8 py-6 flex-1">
-      <div class="text-sm text-zinc-600 pb-2 flex items-center justify-between">
-        <span>{entry.data.date}</span>
-        <span>2 min read</span>
+  <div>
+    <NavBar />
+    <div class="flex w-full">
+      <LeftSideBar />
+      <div class="px-8 py-6 flex-1">
+        <div
+          class="text-sm text-zinc-600 pb-2 flex items-center justify-between"
+        >
+          <span>{entry.data.date}</span>
+          <span>2 min read</span>
+        </div>
+        <article
+          class="prose prose-zinc dark:prose-invert hover:prose-a:border-b prose-a:border-indigo-500 hover:prose-a:text-transparent hover:prose-a:bg-clip-text hover:prose-a:bg-gradient-to-r prose-a:from-blue-600 prose-a:dark:from-blue-400 prose-a:via-indigo-600 prose-a:dark:via-indigo-400 prose-a:to-purple-600 prose-a:dark:to-purple-400"
+        >
+          <Content />
+        </article>
       </div>
-      <article class="prose dark:prose-invert">
-        <Content />
-      </article>
+      <RightSideBar />
     </div>
-    <RightSideBar />
+    <Footer />
   </div>
-  <Footer />
 </MainLayout>

@@ -51,8 +51,8 @@ const Search: React.FC = () => {
   return (
     <SearchDialog.Root>
       <SearchDialog.Trigger asChild>
-        <div className="w-full p-[1px] h-10 transition-all ease-in-out hover:bg-gradient-to-tr from-blue-300 via-indigo-400 to-purple-300 rounded-xl">
-          <button className="w-full h-full p-2 rounded-[11px] bg-white dark:bg-zinc-900 outline-none text-left px-4 flex justify-start items-center space-x-2">
+        <div className="w-full p-[1px] h-10 transition-all ease-in-out hover:bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-300 dark:via-indigo-400 dark:to-purple-300 rounded-xl">
+          <button className="w-full h-full p-2 rounded-[11px] bg-zinc-100 dark:bg-zinc-900 outline-none text-left px-4 flex justify-start items-center space-x-2">
             <svg
               className="w-4 h-4 stroke-zinc-400"
               fill="none"
@@ -73,8 +73,27 @@ const Search: React.FC = () => {
       <SearchDialog.Portal>
         <SearchDialog.Overlay className="bg-zinc-200/40 dark:bg-black/40 fixed top-0 left-0 right-0 bottom-0 backdrop-blur-lg z-50" />
         <SearchDialog.Content className="fixed top-0 left-0 right-0 bottom-0 max-w-4xl h-fit p-4 mx-auto xl:mt-10 z-50">
-          <SearchDialog.Title className="text-lg font-medium text-zinc-200">
-            Search...
+          <SearchDialog.Title className="text-lg font-medium text-zinc-200 flex items-center justify-between">
+            <div>Search...</div>
+            <SearchDialog.Close asChild>
+              <button className="w-fit" aria-label="Close">
+                <svg
+                  fill="none"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="m5 5 14 14m-14 0 14-14"
+                    stroke="#ffffff"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                  />
+                </svg>
+              </button>
+            </SearchDialog.Close>
           </SearchDialog.Title>
           <fieldset>
             <div className="w-full py-4">
@@ -98,13 +117,14 @@ const Search: React.FC = () => {
                     className="w-full h-full outline-none bg-transparent"
                     value={query}
                     onChange={handleInputChange}
+                    autoFocus
                   />
                 </div>
               </div>
             </div>
           </fieldset>
           {results.length !== 0 && (
-            <div className="w-full rounded-xl bg-zinc-900/80 border border-zinc-800 backdrop-blur-lg p-1">
+            <div className="w-full rounded-xl bg-zinc-900/60 border border-zinc-800 backdrop-blur-lg p-1">
               <ul>
                 {results.map((result) => (
                   <li
@@ -128,25 +148,6 @@ const Search: React.FC = () => {
               </ul>
             </div>
           )}
-          <SearchDialog.Close asChild>
-            <button className="fixed top-4 right-4" aria-label="Close">
-              <svg
-                fill="none"
-                height="24"
-                viewBox="0 0 24 24"
-                width="24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="m5 5 14 14m-14 0 14-14"
-                  stroke="#ffffff"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                />
-              </svg>
-            </button>
-          </SearchDialog.Close>
         </SearchDialog.Content>
       </SearchDialog.Portal>
     </SearchDialog.Root>
